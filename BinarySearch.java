@@ -107,7 +107,7 @@ class BinarySearch {
     public static void main(String args[]) {
         BinarySearch ob = new BinarySearch();
         int arr[] = generateArray(20);
-        int result = ob.binarySearch(arr, 2);
+        int result = ob.binarySearch(arr, 19);
         if (result == -1)
             System.out.println("Element not present");
         else

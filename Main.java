@@ -11,9 +11,5 @@ class Main {
         worm.invade();
         worm.doubling();
         worm.invade();
-        worm.doubling();
-        worm.invade();
-        worm.doubling();
-        worm.invade();
     }
 }
