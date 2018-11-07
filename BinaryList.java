@@ -96,7 +96,7 @@ class BinaryList {
                         System.out.print(" ");
                     }
                 }
-                System.out.println();
+                System.out.println("\n");
                 doubling();
             }
         }
