@@ -89,11 +89,11 @@ class BinaryList {
                     for (int i = pointer.getLeftChild(); i <= pointer.getRightChild(); i++) {
                         if (i == pointer.target) {
                             path[i] = '┴';
-                        } else if (i == pointer.getRightChild()) {
+                        } else if (i == pointer.getRightChild() && i < range) {
                             path[i] = '┐';
                         } else if (i == pointer.getLeftChild()) {
                             path[i] = '┌';
-                        } else {
+                        } else if (i < range){
                             path[i] = '─';
                         }
                     }
@@ -126,7 +126,7 @@ class BinaryList {
                         System.out.print(' ');
                     } else if (i < range - 1 && path[i + 1] == ' ') {
                         System.out.print(' ');
-                    } else if (i == range -1 ) {
+                    } else if (i == range - 1) {
                         System.out.print(' ');
                     } else {
                         System.out.print('─');
