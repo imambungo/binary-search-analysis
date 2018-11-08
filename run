@@ -1,2 +1,2 @@
 #!/bin/bash
-javac BinarySearch.java && java BinarySearch
+javac Main.java && java Main
