@@ -124,7 +124,9 @@ class BinaryList {
 
                     if (path[i] == ' ') {
                         System.out.print(' ');
-                    } else if (path[i + 1] == ' ') {
+                    } else if (i < range - 1 && path[i + 1] == ' ') {
+                        System.out.print(' ');
+                    } else if (i == range -1 ) {
                         System.out.print(' ');
                     } else {
                         System.out.print('─');
