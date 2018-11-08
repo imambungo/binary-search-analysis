@@ -115,9 +115,9 @@ class BinaryList {
 
                         if (path[i] == '┌' && j != String.valueOf(i).length() - 1 || path[i] == '┐' && j != 0) {
                             System.out.print(' ');
-                        }
-
-                        else {
+                        } else if (path[i] == '┴' && j != 0) {
+                            System.out.print('─');
+                        } else {
                             System.out.print(path[i]);
                         }
                     }
