@@ -22,7 +22,7 @@ class BinarySearch {
                 return m;
 
             // If x greater, ignore left half
-            if (arr[m] < x) {
+            if (arr[m] < x) { // ke kanan
                 kiri = m + 1;
                 System.out.println(x + " lebih besar dari " + arr[m]);
                 System.out.println("kiri = m + 1");
@@ -31,7 +31,7 @@ class BinarySearch {
             }
 
             // If x is smaller, ignore right half
-            else {
+            else { // ke kiri
                 kanan = m - 1;
                 System.out.println(x + " lebih kecil dari  " + arr[m]);
                 System.out.println("kanan = m - 1");
