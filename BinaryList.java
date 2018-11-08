@@ -86,7 +86,7 @@ class BinaryList {
                 WormNode pointer = root;
                 while (pointer != null) {
                     position[pointer.target] = true;
-                    for (int i = pointer.getLeftChild(); i < pointer.getRightChild(); i++) {
+                    for (int i = pointer.getLeftChild(); i <= pointer.getRightChild(); i++) {
                         if (i == pointer.target) {
                             path[i] = '┴';
                         } else if (i == pointer.getRightChild()) {
@@ -112,6 +112,9 @@ class BinaryList {
                 System.out.println();
                 for (int i = 0; i < range; i++) {
                     for (int j = 0; j < String.valueOf(i).length(); j++) {
+                        // if (path[i] == '┐') {
+                        // System.out.print('$');
+                        // }
                         if (path[i] == '┌' && j != String.valueOf(i).length() - 1 || path[i] == '┐' && j != 0) {
                             System.out.print(' ');
                         }
@@ -125,14 +128,11 @@ class BinaryList {
                     // System.out.print('*');
                     if (path[i] == ' ') {
                         System.out.print(' ');
+                    } else if (path[i + 1] == ' ') {
+                        System.out.print(' ');
                     } else {
                         System.out.print('─');
                     }
-                    // if (i == range - 1) {
-                    //     System.out.print(' ');
-                    // } else {
-                    //     System.out.print('─');
-                    // }
                 }
                 System.out.println();
                 doubling();
