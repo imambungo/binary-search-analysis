@@ -86,15 +86,37 @@ class BinaryList {
                 WormNode pointer = root;
                 while (pointer != null) {
                     position[pointer.target] = true;
-                    for (int i = pointer.getLeftChild(); i <= pointer.getRightChild(); i++) {
-                        if (i == pointer.target) {
-                            path[i] = '┴';
-                        } else if (i == pointer.getRightChild() && i < range) {
-                            path[i] = '┐';
-                        } else if (i == pointer.getLeftChild()) {
-                            path[i] = '┌';
-                        } else if (i < range){
-                            path[i] = '─';
+                    if (pointer.canProduceLeftChild() && pointer.canProduceRightChild()) {
+                        for (int i = pointer.getLeftChild(); i <= pointer.getRightChild(); i++) {
+                            if (i == pointer.target) {
+                                path[i] = '┴';
+                            } else if (i == pointer.getRightChild() && i < range) {
+                                path[i] = '┐';
+                            } else if (i == pointer.getLeftChild()) {
+                                path[i] = '┌';
+                            } else if (i < range) {
+                                path[i] = '─';
+                            }
+                        }
+                    } else if (pointer.canProduceLeftChild()) {
+                        for (int i = pointer.getLeftChild(); i <= pointer.target; i++) {
+                            if (i == pointer.target) {
+                                path[i] = '┘';
+                            } else if (i == pointer.getLeftChild()) {
+                                path[i] = '┌';
+                            } else if (i < range) {
+                                path[i] = '─';
+                            }
+                        }
+                    } else if (pointer.canProduceRightChild()) {
+                        for (int i = pointer.target; i <= pointer.getRightChild(); i++) {
+                            if (i == pointer.target) {
+                                path[i] = '└';
+                            } else if (i == pointer.getRightChild() && i < range) {
+                                path[i] = '┐';
+                            } else if (i < range) {
+                                path[i] = '─';
+                            }
                         }
                     }
                     pointer = pointer.next;
@@ -117,6 +139,8 @@ class BinaryList {
                             System.out.print(' ');
                         } else if (path[i] == '┴' && j != 0) {
                             System.out.print('─');
+                        } else if (String.valueOf(i).length() > 1 && j != String.valueOf(i).length() - 1 && path[i] == '└') {
+                            System.out.print(' ');
                         } else {
                             System.out.print(path[i]);
                         }
@@ -200,6 +224,14 @@ class BinaryList {
 
         int getRightChild() {
             return (target + 1) + (right - (target + 1)) / 2;
+        }
+
+        boolean canProduceLeftChild() {
+            return left <= target - 1;
+        }
+
+        boolean canProduceRightChild() {
+            return target + 1 <= right;
         }
     }
 }

@@ -1,6 +1,6 @@
 class Main {
     public static void main(String[] args) {
-        int size = 35;
+        int size = 27;
         BinaryList worm = new BinaryList();
         worm.inject(size);
         worm.oldWorm();
