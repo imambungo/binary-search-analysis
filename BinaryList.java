@@ -1,14 +1,6 @@
 class BinaryList {
     WormNode root;
 
-    void inject(int totalIndex) {
-        if (root == null) {
-            root = new WormNode(0, totalIndex - 1);
-        } else {
-            System.out.println("inject failed...");
-        }
-    }
-
     void doubling() {
         if (root == null) {
             System.out.println("nothing to double!");
@@ -73,92 +65,96 @@ class BinaryList {
         System.out.println();
     }
 
-    void binaryWorm() {
-        if (root == null || root.next != null) {
-            System.out.println("Make sure BinaryList only have 1 node!");
-        } else {
-            int range = root.right + 1;
-            boolean[] position;
-            char[] path;
-            while (root != null) {
-                position = new boolean[range];
-                path = emptyChar(range);
-                WormNode pointer = root;
-                while (pointer != null) {
-                    position[pointer.target] = true;
-                    if (pointer.canProduceLeftChild() && pointer.canProduceRightChild()) {
-                        for (int i = pointer.getLeftChild(); i <= pointer.getRightChild(); i++) {
-                            if (i == pointer.target) {
-                                path[i] = '┴';
-                            } else if (i == pointer.getRightChild() && i < range) {
-                                path[i] = '┐';
-                            } else if (i == pointer.getLeftChild()) {
-                                path[i] = '┌';
-                            } else if (i < range) {
-                                path[i] = '─';
-                            }
-                        }
-                    } else if (pointer.canProduceLeftChild()) {
-                        for (int i = pointer.getLeftChild(); i <= pointer.target; i++) {
-                            if (i == pointer.target) {
-                                path[i] = '┘';
-                            } else if (i == pointer.getLeftChild()) {
-                                path[i] = '┌';
-                            } else if (i < range) {
-                                path[i] = '─';
-                            }
-                        }
-                    } else if (pointer.canProduceRightChild()) {
-                        for (int i = pointer.target; i <= pointer.getRightChild(); i++) {
-                            if (i == pointer.target) {
-                                path[i] = '└';
-                            } else if (i == pointer.getRightChild() && i < range) {
-                                path[i] = '┐';
-                            } else if (i < range) {
-                                path[i] = '─';
-                            }
+    void binaryWorm(int totalIndex) {
+        root = new WormNode(0, totalIndex - 1);
+        int range = root.right + 1;
+        boolean[] position;
+        char[] path;
+        while (root != null) {
+            position = new boolean[range];
+            path = emptyChar(range);
+            WormNode pointer = root;
+            while (pointer != null) {
+                position[pointer.target] = true;
+                if (pointer.canProduceLeftChild() && pointer.canProduceRightChild()) {
+                    for (int i = pointer.getLeftChild(); i <= pointer.getRightChild(); i++) {
+                        if (i == pointer.target) {
+                            path[i] = '┴';
+                        } else if (i == pointer.getRightChild() && i < range) {
+                            path[i] = '┐';
+                        } else if (i == pointer.getLeftChild()) {
+                            path[i] = '┌';
+                        } else if (i < range) {
+                            path[i] = '─';
                         }
                     }
-                    pointer = pointer.next;
-                }
-                for (int i = 0; i < range; i++) {
-                    if (position[i]) {
-                        System.out.print(i + " ");
-                    } else {
-                        for (int j = 0; j < String.valueOf(i).length(); j++) {
-                            System.out.print(" ");
+                } else if (pointer.canProduceLeftChild()) {
+                    for (int i = pointer.getLeftChild(); i <= pointer.target; i++) {
+                        if (i == pointer.target) {
+                            path[i] = '┘';
+                        } else if (i == pointer.getLeftChild()) {
+                            path[i] = '┌';
+                        } else if (i < range) {
+                            path[i] = '─';
                         }
+                    }
+                } else if (pointer.canProduceRightChild()) {
+                    for (int i = pointer.target; i <= pointer.getRightChild(); i++) {
+                        if (i == pointer.target) {
+                            path[i] = '└';
+                        } else if (i == pointer.getRightChild() && i < range) {
+                            path[i] = '┐';
+                        } else if (i < range) {
+                            path[i] = '─';
+                        }
+                    }
+                }
+                pointer = pointer.next;
+            }
+            for (int i = 0; i < range; i++) {
+                if (position[i]) {
+                    System.out.print(i + " ");
+                } else {
+                    for (int j = 0; j < String.valueOf(i).length(); j++) {
                         System.out.print(" ");
                     }
+                    System.out.print(" ");
                 }
-                System.out.println();
-                for (int i = 0; i < range; i++) {
-                    for (int j = 0; j < String.valueOf(i).length(); j++) {
+            }
+            System.out.println();
+            for (int i = 0; i < range; i++) {
+                for (int j = 0; j < String.valueOf(i).length(); j++) {
 
-                        if (path[i] == '┌' && j != String.valueOf(i).length() - 1 || path[i] == '┐' && j != 0) {
-                            System.out.print(' ');
-                        } else if (path[i] == '┴' && j != 0) {
-                            System.out.print('─');
-                        } else if (String.valueOf(i).length() > 1 && j != String.valueOf(i).length() - 1 && path[i] == '└') {
-                            System.out.print(' ');
-                        } else {
-                            System.out.print(path[i]);
-                        }
-                    }
-
-                    if (path[i] == ' ') {
+                    if (path[i] == '┌' && j != String.valueOf(i).length() - 1 || path[i] == '┐' && j != 0) {
                         System.out.print(' ');
-                    } else if (i < range - 1 && path[i + 1] == ' ') {
-                        System.out.print(' ');
-                    } else if (i == range - 1) {
+                    } else if (path[i] == '┴' && j != 0) {
+                        System.out.print('─');
+                    } else if (String.valueOf(i).length() > 1 && j != String.valueOf(i).length() - 1
+                            && path[i] == '└') {
                         System.out.print(' ');
                     } else {
-                        System.out.print('─');
+                        System.out.print(path[i]);
                     }
                 }
-                System.out.println();
-                doubling();
+
+                if (path[i] == ' ') {
+                    System.out.print(' ');
+                } else if (i < range - 1 && path[i + 1] == ' ') {
+                    System.out.print(' ');
+                } else if (i == range - 1) {
+                    System.out.print(' ');
+                } else {
+                    System.out.print('─');
+                }
             }
+            System.out.println();
+            doubling();
+        }
+    }
+
+    void binaryGrow(int size) {
+        for (int i = 1; i <= size; i++) {
+            binaryWorm(i);
         }
     }
 
