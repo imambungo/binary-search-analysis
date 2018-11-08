@@ -15,10 +15,10 @@ class BinaryList {
         } else {
             WormNode pointer = root;
             while (pointer != null) {
-                if (pointer.left < pointer.right) {
-                    if (pointer.left <= pointer.target - 1) {
+                if (pointer.left < pointer.right) { // hanya yang bisa mengganda
+                    if (pointer.left <= pointer.target - 1) { // jika bisa membuat anak kiri
                         WormNode newBrother = new WormNode(pointer.left, pointer.target - 1);
-                        if (pointer.prev == null) {
+                        if (pointer.prev == null) { // jika di ujung kiri
                             pointer.prev = newBrother;
                             newBrother.next = pointer;
                             root = newBrother;
@@ -29,26 +29,26 @@ class BinaryList {
                             pointer.prev = newBrother;
                         }
                     }
-                    if (pointer.target + 1 <= pointer.right) {
+                    if (pointer.target + 1 <= pointer.right) { // jika bisa membuat anak kanan
                         pointer.left = pointer.target + 1;
                         pointer.updateTarget();
                     }
                     pointer = pointer.next;
                 } else { // jika tidak bisa lagi mengganda, musnahkan
                     WormNode theRealNext = pointer.next;
-                    if (pointer.prev == null) {
-                        if (pointer.next == null) {
+                    if (pointer.prev == null) { // jika di ujung kiri
+                        if (pointer.next == null) { // jika cuma 1 node
                             root = null;
                         } else {
                             root = pointer.next;
                             pointer.next = null;
                             root.prev = null;
                         }
-                    } else {
-                        if (pointer.next == null) {
+                    } else { // jika bukan di ujung kiri
+                        if (pointer.next == null) { // jika di ujung kanan
                             pointer.prev.next = null;
                             pointer.prev = null;
-                        } else {
+                        } else { // jika bukan di tepi/ujung
                             pointer.prev.next = pointer.next;
                             pointer.next.prev = pointer.prev;
                             pointer.prev = null;

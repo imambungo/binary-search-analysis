@@ -3,13 +3,17 @@ class Main {
         BinaryList worm = new BinaryList();
         worm.inject(28);
         worm.binaryWorm();
-        System.out.println("\n");
-        BinaryList worm2 = new BinaryList();
-        worm2.inject(31);
-        worm2.binaryWorm();
-        System.out.println("\n");
-        BinaryList worm3 = new BinaryList();
-        worm3.inject(32);
-        worm3.binaryWorm();
+        // System.out.println("\n");
+        int a = '┐';
+        int b = '└';
+        int c = '┴';
+        int d = '┘';
+        int e = '┌';
+        int[] arr = { '┌', '┐', '┴', '┘', '└' };
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+        System.out.println(a + " " + b);
     }
 }
