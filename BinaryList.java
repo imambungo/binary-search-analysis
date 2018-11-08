@@ -112,20 +112,16 @@ class BinaryList {
                 System.out.println();
                 for (int i = 0; i < range; i++) {
                     for (int j = 0; j < String.valueOf(i).length(); j++) {
-                        // if (path[i] == '┐') {
-                        // System.out.print('$');
-                        // }
+
                         if (path[i] == '┌' && j != String.valueOf(i).length() - 1 || path[i] == '┐' && j != 0) {
                             System.out.print(' ');
                         }
-                        // else if (path[i] == '┐' && j != 0) {
 
-                        // }
                         else {
                             System.out.print(path[i]);
                         }
                     }
-                    // System.out.print('*');
+
                     if (path[i] == ' ') {
                         System.out.print(' ');
                     } else if (path[i + 1] == ' ') {
@@ -134,6 +130,37 @@ class BinaryList {
                         System.out.print('─');
                     }
                 }
+                System.out.println();
+                doubling();
+            }
+        }
+    }
+
+    void oldWorm() {
+        if (root == null || root.next != null) {
+            System.out.println("Make sure BinaryList only have 1 node!");
+        } else {
+            int range = root.right + 1;
+            boolean[] position;
+            while (root != null) {
+                position = new boolean[range];
+                WormNode pointer = root;
+                while (pointer != null) {
+                    position[pointer.target] = true;
+                    pointer = pointer.next;
+                }
+                for (int i = 0; i < range; i++) {
+                    if (position[i]) {
+                        System.out.print(i + " ");
+                    } else {
+                        for (int j = 0; j < String.valueOf(i).length(); j++) {
+                            System.out.print(" ");
+                        }
+                        System.out.print(" ");
+                    }
+                }
+                System.out.println();
+
                 System.out.println();
                 doubling();
             }
