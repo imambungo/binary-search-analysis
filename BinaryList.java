@@ -155,6 +155,12 @@ class BinaryList {
     void binaryGrow(int size) {
         for (int i = 1; i <= size; i++) {
             binaryWorm(i);
+            if (i < size) {
+                for (int j = 0; j <= i; j++) {
+                    System.out.print(j + " ");
+                }
+                System.out.println("\n");
+            }
         }
     }
 
